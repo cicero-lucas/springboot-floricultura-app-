@@ -1,0 +1,153 @@
+.services {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  position: relative;
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.services-visible .services-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services-header h2 {
+  font-size: 2.5rem;
+  color: #2d5016;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.services-header p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  border: 1px solid #f1f3f4;
+}
+
+.services-visible .service-card {
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideUp 0.8s ease forwards;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.service-icon {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  animation: bounce 2s infinite;
+}
+
+.emoji-icon {
+  font-size: 4rem;
+  display: block;
+}
+
+.service-card:nth-child(2) .service-icon {
+  animation-delay: 0.2s;
+}
+
+.service-card:nth-child(3) .service-icon {
+  animation-delay: 0.4s;
+}
+
+.service-card:nth-child(4) .service-icon {
+  animation-delay: 0.6s;
+}
+
+.service-card h3 {
+  font-size: 1.4rem;
+  color: #2d5016;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.service-card p {
+  color: #6c757d;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@media (max-width: 768px) {
+  .services {
+    padding: 3rem 0;
+  }
+
+  .services-header h2 {
+    font-size: 2rem;
+  }
+
+  .services-header p {
+    font-size: 1.1rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-icon {
+    font-size: 3rem;
+  }
+}
