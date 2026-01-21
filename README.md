@@ -336,13 +336,7 @@ mvn checkstyle:check
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 👤 Author
 
-**Lucas**
-
-## 📞 Support
-
-For support, open an issue in the repository or contact the development team.
 
 ---
 
