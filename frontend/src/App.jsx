@@ -11,6 +11,7 @@ import VendaListPage from './pages/venda/VendaListPage';
 import VendaFormPage from './pages/venda/VendaFormPage';
 import LoginPage from './pages/login/LoginPage';
 import NotFoundPage from './pages/errors/NotFoundPage';
+import CadastroPage from './pages/cadastro/CadastroPage';
 
 // Import components and contexts
 import { AuthProvider } from './contexts/AuthContext';
@@ -28,6 +29,8 @@ function App() {
         <Routes>
           {/* Login */}
           <Route path="/login" element={<LoginPage />} />
+
+          <Route path="/cadastro" element={<CadastroPage />} />
           
           {/* Redirect root to login */}
           <Route path="/" element={<Navigate to="/login" replace />} />

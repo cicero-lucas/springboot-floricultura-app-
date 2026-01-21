@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { showSecureToast } from '../../utils/secureMessages';
-import './LoginPage.css';
+import './CadastroPage.css';
+import cadastroService from '../../services/cadastroService';
 
-const LoginPage = () => {
+const CadastroPage = () => {
   const [formData, setFormData] = useState({
+    name:'',
     email: '',
     password: ''
   });
@@ -17,20 +19,19 @@ const LoginPage = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
-      await login(formData.email, formData.password);
+      await cadastroService.cadastro(formData.name, formData.email, formData.password);
+      console.log('Cadastro realizado com sucesso');
       showSecureToast('success', 'default');
       setTimeout(() => {
-        window.location.href = '/home';
+        window.location.href = '/login';
       }, 1500);
     } catch (error) {
-      console.error('Erro no login:', error.message);
       showSecureToast('error', 'validation');
     } finally {
       setIsLoading(false);
@@ -62,11 +63,24 @@ const LoginPage = () => {
           <div className="login-form-container">
             <div className="login-header">
               <img src="/images/logo.svg" alt="Flora Bella" className="login-logo-large" />
-              <h1>🔑 Fazer Login</h1>
-              <p>Acesse sua conta</p>
+              <h1>🔑 Fazer seu cadastro</h1>
+              <p>Crie sua conta</p>
             </div>
             
             <form onSubmit={handleSubmit} className="login-form">
+              <div className="form-group">
+                <label htmlFor="name">👤 Nome</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Digite seu nome"
+                  required
+                />
+              </div>
+
               <div className="form-group">
                 <label htmlFor="email">📧 Email</label>
                 <input
@@ -93,22 +107,11 @@ const LoginPage = () => {
                 />
               </div>
               
-              <div className="form-options">
-                <label className="checkbox-container">
-                  <input type="checkbox" />
-                  <span className="checkmark"></span>
-                  Lembrar de mim
-                </label>
-                <Link to="/esqueci-senha" className="forgot-password">
-                  Esqueceu a senha?
-                </Link>
-              </div>
-              
               <button type="submit" className="login-btn" disabled={isLoading}>
                 {isLoading ? (
                   <>
                     <span className="spinner"></span>
-                    Entrando...
+                    Cadastrando...
                   </>
                 ) : (
                   <>
@@ -117,25 +120,7 @@ const LoginPage = () => {
                 )}
               </button>
               
-              <div className="login-divider">
-                <span>ou</span>
-              </div>
               
-              <div className="social-login">
-                <button type="button" className="social-btn google">
-                  🔍 Entrar com Google
-                </button>
-                <button type="button" className="social-btn facebook">
-                  👥 Entrar com Facebook
-                </button>
-              </div>
-              
-              <div className="signup-link">
-                <p>
-                  Não tem uma conta? 
-                  <Link to="/cadastro"> 🌸 Cadastre-se</Link>
-                </p>
-              </div>
             </form>
           </div>
         </div>
@@ -144,4 +129,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default CadastroPage;

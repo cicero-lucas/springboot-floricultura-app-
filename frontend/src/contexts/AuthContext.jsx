@@ -22,13 +22,12 @@ export const AuthProvider = ({ children }) => {
 
     const checkAuth = () => {
         const token = AuthService.getToken();
-        const adminData = AuthService.getAdmin();
+
         
-        console.log('Verificando auth:', { token: !!token, admin: !!adminData });
+        console.log('Verificando auth:', { token: !!token});
         
-        if (token && adminData) {
+        if (token ) {
             setIsAuthenticated(true);
-            setAdmin(adminData);
         } else {
             setIsAuthenticated(false);
             setAdmin(null);
@@ -41,20 +40,18 @@ export const AuthProvider = ({ children }) => {
         const data = await AuthService.login(email, password);
         console.log('Login realizado:', data);
         setIsAuthenticated(true);
-        setAdmin(data.admin);
+
         return data;
     };
 
     const logout = () => {
         AuthService.logout();
         setIsAuthenticated(false);
-        setAdmin(null);
         console.log('Logout realizado');
     };
 
     const value = {
         isAuthenticated,
-        admin,
         login,
         logout,
         loading

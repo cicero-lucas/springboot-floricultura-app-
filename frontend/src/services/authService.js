@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 class AuthService {
     static async login(email, password) {
@@ -10,31 +10,27 @@ class AuthService {
             body: JSON.stringify({ email, password }),
         });
 
-        const data = await response.json();
-
         if (!response.ok) {
-            throw new Error(data.error || 'Erro no login');
+            const data = await response.json();
+            throw new Error(data.message || data.error || 'Erro no login');
         }
 
+        const data = await response.json();
         localStorage.setItem('token', data.token);
-        localStorage.setItem('admin', JSON.stringify(data.admin));
-        
+      
         return data;
     }
 
     static logout() {
         localStorage.removeItem('token');
-        localStorage.removeItem('admin');
+     
     }
 
     static getToken() {
         return localStorage.getItem('token');
     }
 
-    static getAdmin() {
-        const admin = localStorage.getItem('admin');
-        return admin ? JSON.parse(admin) : null;
-    }
+   
 
     static isAuthenticated() {
         return !!this.getToken();
