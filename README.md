@@ -144,7 +144,7 @@ api.security.token.secret=your_jwt_secret_key
 ### Environment Setup
 
 #### Prerequisites
-- Java 17+
+- Java 27+
 - Maven 3.8+
 - MySQL 8.0+
 - Node.js 18+
